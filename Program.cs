@@ -1,32 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// See https://aka.ms/new-console-template for more information
 
-namespace Домашно_за_11._10._2021
+internal class Program
 {
-    class Program
+    private static void Main(string[] args)
     {
-        static void Main(string[] args)
+        int hours = int.Parse(Console.ReadLine());
+        int minutes = int.Parse(Console.ReadLine());
+        int seconds = int.Parse(Console.ReadLine());
+        
+        double meters = double.Parse(Console.ReadLine());
+       
+        try
         {
-            //Ахмед Шакиров Ахмедов №2
-
-            //Вариант №1
-            int Ox = 0x0002;
-            string two = Convert.ToString(Ox,2);
-            Console.WriteLine(two);
-
-            //Вариант №2
-            //string sixteen = Console.ReadLine();
-            //int ten= Convert.ToInt32(sixteen,16);
-            //string two= Convert.ToString(ten,2);
-            //Console.WriteLine(two);
-
-            // Математическо решение на задачата:
-            // 2/2=1|0
-            // 1/2=0|1
-            // Отговор:10
+            int timeToSecondsConverter = TimeToSecondCoverter(hours, minutes, seconds);
+            Console.WriteLine($"Time in seconds:{timeToSecondsConverter}");
+            double metersToMillsConverter = MetersToMillsCoverter(meters);
+            Console.WriteLine($"Length in mills:{metersToMillsConverter}");           
+            double resultOfSolve = metersToMillsConverter / timeToSecondsConverter;
+            Console.WriteLine($"Velocity in mills/second:{resultOfSolve}");
+            Console.WriteLine("The Program end successfuly!!!");
         }
+        catch (Exception e)
+        {
+            Console.WriteLine("Something is WRONG!!!");
+            Console.WriteLine($"Type of error:{e.GetType().Name}");
+            Console.WriteLine($"Description of code:{e.Message}");
+            Console.WriteLine($"Program:{e.Source}");
+            Console.WriteLine($"Method:{e.TargetSite.Name}");
+            Console.WriteLine($"Place of error:{e.StackTrace}");
+            
+        }
+    }
+    private static int TimeToSecondCoverter(int hours, int minutes, int seconds) 
+    {
+        hours = hours * 60 * 60;
+        minutes = minutes * 60;
+        int covertedSeconds=hours+minutes+seconds;
+        return covertedSeconds;
+    }
+    private static double MetersToMillsCoverter(double meters)
+    {
+        return meters * 39730;
     }
 }
